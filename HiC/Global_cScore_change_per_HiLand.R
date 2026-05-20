@@ -14,8 +14,8 @@ hilands_gr <- GRanges(
   state    = hilands$state
 )
 
-wt  <- import("LB1Fplus_modified_cscore.bedgraph")
-mut <- import("LB1Fd_modified_cscore.bedgraph")
+wt  <- import("LB1Fplus_cscore.bedgraph")
+mut <- import("LB1Fd_cscore.bedgraph")
 
 # Aggregate cScore per HiLands region
 get_region_score <- function(cscore_gr, hilands_gr) {
