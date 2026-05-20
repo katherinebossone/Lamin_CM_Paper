@@ -132,7 +132,7 @@ combined <- Reduce(function(x, y) merge(x, y, by = c("chrom", "start", "end"), a
 combined[is.na(combined)] <- 0
 
 # Prepare PCA input
-pca_data_resampled <- combined[, c("H3K9me3_score", "H3K27me3_score", "H3K4me1_score", "H3K4me3_score", "ATAC_score", "LAD_score")]
+pca_data_resampled <- combined[, c("H3K9me2_score", "H3K9me3_score", "H3K27me3_score", "H3K4me1_score", "H3K4me3_score", "H3K27ac_score", "ATAC_score", "LAD_score")]
 pca_data_scaled <- scale(pca_data_resampled)
 
 # Perform PCA
