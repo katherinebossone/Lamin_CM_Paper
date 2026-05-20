@@ -7,6 +7,8 @@ library(reshape2)
 library(zoo)
 library(GenomicRanges)
 
+
+## Hi-C Heatmap ##
 # parameters
 MIN_READS <- 20
 NEW_RES   <- 20000
@@ -284,3 +286,56 @@ if (length(bound_pos_bp) > 0) {
   
 }
 p
+
+
+## Pseudo-4C ##
+
+GENE_NAME <- "Jun" 
+GENE_POS  <- 95052205    # Jun
+# GENE_POS  <- 126899403   # Cdk4 
+
+WINDOW_BINS <- 2            # smoothing window around anchor
+SMOOTH_K    <- 5            # rolling smooth
+
+bins <- as.numeric(rownames(log2fc_mat))
+
+# map gene → bin
+anchor_bin <- floor(GENE_POS / NEW_RES) * NEW_RES
+anchor_idx <- which(bins == anchor_bin)
+
+if (length(anchor_idx) == 0) {
+  stop("Anchor bin not found")
+}
+
+# take signal (row)
+signal <- log2fc_mat[anchor_idx, ]
+
+# build table
+df <- data.table(
+  pos = bins,
+  value = signal
+)
+
+# restrict to region
+df <- df[pos >= PLOT_START & pos <= PLOT_END]
+
+# smooth (important)
+df[, smooth := zoo::rollmean(value, k = 5, fill = NA, align = "center")]
+df[, smooth := zoo::na.approx(smooth, na.rm = FALSE)]
+
+# plot
+ggplot(df, aes(x = pos, y = smooth)) +
+  geom_line(color = "#B2182B", linewidth = 0.7, na.rm = TRUE) +
+  
+  geom_vline(xintercept = bound_pos_bp, color = "black",
+             alpha = 0.3) +
+  geom_hline(yintercept = 0, color = "black",
+             alpha = 0.8) +
+  
+  scale_x_continuous(labels = function(x) paste0(x/1e6, " Mb")) +
+  
+  labs(title = paste0("Pseudo-4C (log2FC): ", GENE_NAME),
+       x = ROI_CHR,
+       y = "log2FC") +
+  
+  theme_minimal()
