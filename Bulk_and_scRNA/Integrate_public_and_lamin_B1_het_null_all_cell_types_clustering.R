@@ -7,7 +7,7 @@ library(ggplot2)
 # Normalize and scale both datasets
 ShenJ_TC <- SCTransform(ShenJ_TC, verbose = FALSE)
 P05Heart.combined <- SCTransform(P05Heart.combined, verbose = FALSE)
-Feng_W_TC <- SCTransform(C57BL6_seurat_object, verbose = FALSE)
+Feng_W_TC <- SCTransform(Feng_W_TC, verbose = FALSE)
 
 # Perform CCA for integration
 integration_anchors <- FindIntegrationAnchors(
