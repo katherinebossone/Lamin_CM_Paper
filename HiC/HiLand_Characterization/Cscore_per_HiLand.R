@@ -16,10 +16,10 @@ hilands_gr <- GRanges(
   state    = hilands$state
 )
 
-lamin_het <- import("Documents/LB1Fplus_modified_cscore_negated.bedgraph")
+cscore_het <- import("Documents/LB1Fplus_modified_cscore_negated.bedgraph")
 
 #Aggregate signal per HiLands region
-aggregate_signal <- function(atac_gr, hilands_gr) {
+aggregate_signal <- function(cscore_gr, hilands_gr) {
   
   hits <- findOverlaps(hilands_gr, atac_gr)
   
@@ -39,7 +39,7 @@ aggregate_signal <- function(atac_gr, hilands_gr) {
 }
 
 # Aggregate for both conditions
-het_summary  <- aggregate_signal(lamin_het,  hilands_gr)
+het_summary  <- aggregate_signal(cscore_het,  hilands_gr)
 
 # Map the wt condition
 het_summary$state <- factor(
