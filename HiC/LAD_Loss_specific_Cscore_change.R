@@ -73,6 +73,6 @@ plot_unique <- ggplot(df_unique, aes(x = "", y = delta)) +
 print(plot_unique)
 
 # Wilcoxon signed-rank test
-wilcox_unique <- wilcox.test(df_unique$log2FC, mu = 0)
+wilcox_unique <- wilcox.test(df_unique$delta, mu = 0)
 cat("\nWilcoxon signed-rank test:\n")
 print(wilcox_unique)
