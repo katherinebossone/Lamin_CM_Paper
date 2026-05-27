@@ -25,12 +25,12 @@ aggregate_signal <- function(lamin_gr, hilands_gr) {
   
   df <- data.frame(
     hiland_id = queryHits(hits),
-    atac_score = mcols(atac_gr)$score[subjectHits(hits)]
+    lamin_score = mcols(lamin_gr)$score[subjectHits(hits)]
   )
   
   summary <- df %>%
     group_by(hiland_id) %>%
-    summarise(mean_signal = mean(atac_score, na.rm = TRUE)) %>%
+    summarise(mean_signal = mean(lamin_score, na.rm = TRUE)) %>%
     ungroup()
   
   # attach state info
