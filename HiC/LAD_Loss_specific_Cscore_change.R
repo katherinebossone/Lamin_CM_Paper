@@ -41,15 +41,13 @@ null <- null[!overlapsAny(null, exclude)]
 het_unique <- GenomicRanges::setdiff(het, null)
 
 # Import cScore bedGraphs
-atac_het  <- import(cscore_het_file, format = "bedGraph")
-atac_null <- import(cscore_null_file, format = "bedGraph")
+cscore_het  <- import(cscore_het_file, format = "bedGraph")
+cscore_null <- import(cscore_null_file, format = "bedGraph")
 
-# if (!"score" %in% colnames(mcols(atac_het)))  mcols(atac_het)$score <- mcols(atac_het)[,1]
-# if (!"score" %in% colnames(mcols(atac_null))) mcols(atac_null)$score <- mcols(atac_null)[,1]
 
 # Subset c-scores by unique het LAD coordinates
-het_bins  <- subsetByOverlaps(atac_het,  het_unique)
-null_bins <- subsetByOverlaps(atac_null, het_unique)
+het_bins  <- subsetByOverlaps(cscore_het,  het_unique)
+null_bins <- subsetByOverlaps(cscore_null, het_unique)
 
 hits <- findOverlaps(het_bins, null_bins, type = "equal")
 
@@ -58,23 +56,23 @@ df_unique <- data.frame(
   null_score = mcols(null_bins)$score[subjectHits(hits)]
 )
 
-# Compute log2FC
+# Compute difference
 eps <- 1e-6
-df_unique$log2FC <- -df_unique$null_score - -df_unique$het_score
+df_unique$delta <- df_unique$null_score - df_unique$het_score
 
 # Plot
-plot_unique <- ggplot(df_unique, aes(x = "", y = log2FC)) +
+plot_unique <- ggplot(df_unique, aes(x = "", y = delta)) +
   geom_boxplot(fill = "steelblue", alpha = 0.8, outlier.shape = NA) +
   geom_hline(yintercept = 0, linetype = "dashed") +
   coord_cartesian(ylim = c(-0.6, 0.5)) +
   theme_minimal() +
-  ylab("Δ c-score (LB1null − LB1het)") +
+  ylab("Delta Cscore (LB1null − LB1het)") +
   xlab("") +
-  ggtitle("c-score change in unique het LAD regions")
+  ggtitle("Cscore change in unique het LAD regions")
 
 print(plot_unique)
 
 # Wilcoxon signed-rank test
 wilcox_unique <- wilcox.test(df_unique$log2FC, mu = 0)
-cat("\nWilcoxon signed-rank test for log2FC in unique het LADs:\n")
+cat("\nWilcoxon signed-rank test:\n")
 print(wilcox_unique)
