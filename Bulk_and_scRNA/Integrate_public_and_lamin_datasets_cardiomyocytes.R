@@ -3,9 +3,9 @@ library(monocle3)
 library(dplyr)
 library(ggplot2)
 
-#To look at all heart cell populations use datasets that do not subset out all cells before normalization/scaling step.
+# Non-cardiomyocytes already removed prior to running script
 # To focus on ventricular clusters
-time_course_data <- subset(time_course_data, subset = cell_type_spec == "ventricular_cm")
+time_course_data <- subset(Feng_W_TC, subset = cell_type_spec == "ventricular_cm")
 cells_to_remove <- WhichCells(ShenJ_TC_CM, idents = c(0,13,28))
 time_course_data2 <- subset(ShenJ_TC_CM, cells = setdiff(Cells(ShenJ_TC_CM), cells_to_remove))
 cells_to_remove <- WhichCells(P05_filtered, idents = c(11,5))
