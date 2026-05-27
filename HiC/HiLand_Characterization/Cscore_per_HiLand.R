@@ -7,7 +7,7 @@ library(ggplot2)
 
 # Read hiland file
 
-hilands <- read.table("Desktop/state_merged_sorted.bed", header = FALSE)
+hilands <- read.table("state_merged_sorted.bed", header = FALSE)
 colnames(hilands) <- c("chr", "start", "end", "state")
 
 hilands_gr <- GRanges(
@@ -16,21 +16,21 @@ hilands_gr <- GRanges(
   state    = hilands$state
 )
 
-cscore_het <- import("Documents/LB1Fplus_modified_cscore_negated.bedgraph")
+cscore_het <- import("LB1Fplus_modified_cscore_negated.bedgraph")
 
-#Aggregate signal per HiLands region
+# Aggregate signal per HiLands region
 aggregate_signal <- function(cscore_gr, hilands_gr) {
   
-  hits <- findOverlaps(hilands_gr, atac_gr)
+  hits <- findOverlaps(hilands_gr, cscore_gr)
   
   df <- data.frame(
     hiland_id = queryHits(hits),
-    atac_score = mcols(atac_gr)$score[subjectHits(hits)]
+    cscore_score = mcols(cscore_gr)$score[subjectHits(hits)]
   )
   
   summary <- df %>%
     group_by(hiland_id) %>%
-    summarise(mean_signal = mean(atac_score, na.rm = TRUE)) %>%
+    summarise(mean_signal = mean(cscore_score, na.rm = TRUE)) %>%
     ungroup()
   
   # attach state info
