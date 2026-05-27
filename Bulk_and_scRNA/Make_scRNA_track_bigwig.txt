@@ -1,0 +1,50 @@
+## In R ##
+clusters_of_interest <- c(0, 1, 2, 3, 4, 6, 7, 8)
+
+Idents(integrated_data) <- "seurat_clusters"
+
+genotypes <- c("LB1Fplus", "LB1Fd")
+
+for (cl in clusters_of_interest) {
+  for (geno in genotypes) {
+    
+    cells <- WhichCells(
+      integrated_data,
+      idents = cl,
+      expression = genotype == geno
+    )
+    
+    write.table(
+      cells,
+      file = paste0("cluster_", cl, "_", geno, "_barcodes.txt"),
+      quote = FALSE,
+      row.names = FALSE,
+      col.names = FALSE
+    )
+  }
+}
+
+## In terminal ##
+# Get list of barcode names for cells in cardiomyocyte clusters
+cat cluster*LB1Fplus* > LB1Fplus_cm_reads.txt
+cat cluster*LB1Fd* > LB1Fd_cm_reads.txt
+
+# Fix files so they can be comparable for bam files
+cut -d'_' -f3 LB1Fd_cm_reads.txt > LB1Fd_clusters_fixed.txt
+cut -d'_' -f3 LB1Fplus_cm_reads.txt > LB1Fplus_clusters_fixed.txt
+
+# Extract reads from cells in list
+samtools view -b -D CB:LB1Fd_clusters_fixed.txt /mnt/sequence/10x/qc/KB2-123_count/outs/possorted_genome_bam.bam > KB2_LB1Fd.bam
+samtools view -b -D CB:LB1Fd_clusters_fixed.txt /mnt/sequence/10x/KB3_count/outs/possorted_genome_bam.bam > KB3_LB1Fd.bam
+samtools view -b -D CB:LB1Fplus_clusters_fixed.txt   /mnt/sequence/10x/qc/KB4-123_count/outs/possorted_genome_bam.bam   > LB1Fplus_clusters_fixed.bam
+
+# Merge mutant files
+samtools merge LB1Fd_clusters_fixed.bam KB2_LB1Fd.bam KB3_LB1Fd.bam
+
+# Index
+samtools index LB1Fplus_clusters_fixed.bam
+samtools index LB1Fd_clusters_fixed.bam
+
+# Create bigWig files from reads
+bamCoverage -b LB1Fplus_clusters_fixed.bam -o LB1Fplus_clusters_fixed.bw --normalizeUsing CPM --binSize 1
+bamCoverage -b LB1Fd_clusters_fixed.bam -o LB1Fd_clusters_fixed.bw --normalizeUsing CPM --binSize 1
