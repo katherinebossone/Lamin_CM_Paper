@@ -19,9 +19,9 @@ hilands_gr <- GRanges(
 lamin_het <- import("Desktop/LB1het_LAC_zscore.bedgraph")
 
 # Aggregate signal per HiLands region
-aggregate_signal <- function(atac_gr, hilands_gr) {
+aggregate_signal <- function(lamin_gr, hilands_gr) {
   
-  hits <- findOverlaps(hilands_gr, atac_gr)
+  hits <- findOverlaps(hilands_gr, lamin_gr)
   
   df <- data.frame(
     hiland_id = queryHits(hits),
