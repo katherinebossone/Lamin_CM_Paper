@@ -5,7 +5,7 @@ library(tidyr)
 library(ggplot2)
 
 
-#Read hiland file
+# Read hiland file
 
 hilands <- read.table("Desktop/state_merged_sorted.bed", header = FALSE)
 colnames(hilands) <- c("chr", "start", "end", "state")
@@ -19,7 +19,7 @@ hilands_gr <- GRanges(
 lamin_het <- import("Desktop/LB1het_LAC_zscore.bedgraph")
 lamin_null <- import("Desktop/LB1null_LAC_zscore.bedgraph")
 
-#Aggregate ATAC signal per HiLands region
+# Aggregate signal per HiLands region
 aggregate_signal <- function(atac_gr, hilands_gr) {
   
   hits <- findOverlaps(hilands_gr, atac_gr)
@@ -43,7 +43,7 @@ aggregate_signal <- function(atac_gr, hilands_gr) {
 het_summary  <- aggregate_signal(lamin_het,  hilands_gr)
 null_summary <- aggregate_signal(lamin_null, hilands_gr)
 
-#Combine and compute log2 fold-change
+# Combine and compute log2 fold-change
 
 het_summary2 <- het_summary %>%
   mutate(het_signal = mean_signal) %>%
@@ -70,7 +70,7 @@ state_summary <- combined %>%
   )
 
 
-#summary statistics per state
+# summary statistics per state
 
 state_summary_stats <- combined %>%
   group_by(state) %>%
