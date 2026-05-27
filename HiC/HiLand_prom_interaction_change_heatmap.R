@@ -2,7 +2,7 @@ library(pheatmap)
 library(dplyr)
 library(gridExtra)
 
-# Use final_counts file from HiLand_promoter_interaction_change.R scripe
+# Use final_counts file from HiLand_promoter_interaction_change.R script
 
 # Parameters
 FOCUS_STATE <- "Y"      # "P", "B", "G", "Y", "O", "R"
