@@ -12,8 +12,8 @@ hits <- findOverlaps(cscore_het, cscore_null)
 
 # Build combined dataframe of overlapping region scores
 combined <- data.frame(
-  het_signal  = mcols(atac_het)$score[queryHits(hits)],
-  null_signal = mcols(atac_null)$score[subjectHits(hits)]
+  het_signal  = mcols(cscore_het)$score[queryHits(hits)],
+  null_signal = mcols(cscore_null)$score[subjectHits(hits)]
 ) %>%
   mutate(delta = null_signal - het_signal)
 
@@ -27,15 +27,15 @@ summary_stats <- combined %>%
     median_null = median(null_signal, na.rm = TRUE),
     sd_het      = sd(het_signal,  na.rm = TRUE),
     sd_null     = sd(null_signal, na.rm = TRUE),
-    mean_log2FC = mean(delta, na.rm = TRUE)
+    mean_delta = mean(delta, na.rm = TRUE)
   )
 summary_stats
 
 # Wilcoxon test (global)
 wilcox.test(combined$null_signal, combined$het_signal, paired = FALSE)
 
-# Plot global log2FC distribution
-ggplot(combined, aes(x = "", y = log2FC)) +
+# Plot 
+ggplot(combined, aes(x = "", y = delta)) +
   geom_boxplot(outlier.shape = NA, alpha = 0.9, fill = "steelblue", width = 0.4) +
   geom_hline(yintercept = 0, linetype = "dashed") +
   ylim(-0.5, 0.5) +
