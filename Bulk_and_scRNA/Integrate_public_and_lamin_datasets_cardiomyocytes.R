@@ -34,4 +34,41 @@ integrated_data <- RunUMAP(integrated_data, dims = 1:12)
 
 # Visualize the results
 DefaultAssay(integrated_data) <- "SCT"
-DimPlot(subset_obj, reduction = "umap", split.by = "genotype", pt.size = 0.5, label = FALSE)  # Visualize different datasets
+DimPlot(subset_obj, reduction = "umap", pt.size = 0.5, label = FALSE)  
+
+# Highlight public dataset P1
+dataset_to_highlight <- "P1"
+cells_of_interest <- WhichCells(integrated_data, expression = stage == dataset_to_highlight)
+P1 <- DimPlot(integrated_data, 
+              cells.highlight = list(dataset_to_highlight = cells_of_interest), 
+              cols.highlight = "#008B8B", 
+              cols = "lightgrey") +
+  ggtitle(paste("Cluster", cluster_to_highlight)) + NoLegend()
+
+# Highlight public dataset E13.5
+dataset_to_highlight <- "E13.5"
+cells_of_interest <- WhichCells(integrated_data, expression = stage == dataset_to_highlight)
+E13 <- DimPlot(integrated_data, 
+              cells.highlight = list(dataset_to_highlight = cells_of_interest), 
+              cols.highlight = "#008B8B", 
+              cols = "lightgrey") +
+  ggtitle(paste("Cluster", cluster_to_highlight)) + NoLegend()
+
+# Highlight lamin-B1 het dataset 
+dataset_to_highlight <- "LB1Fplus"
+cells_of_interest <- WhichCells(integrated_data, expression = genotype == dataset_to_highlight)
+LB1Fplus <- DimPlot(integrated_data, 
+               cells.highlight = list(dataset_to_highlight = cells_of_interest), 
+               cols.highlight = "#008B8B", 
+               cols = "lightgrey") +
+  ggtitle(paste("Cluster", cluster_to_highlight)) + NoLegend()
+
+# Highlight lamin-B1 null dataset 
+dataset_to_highlight <- "LB1Fd"
+cells_of_interest <- WhichCells(integrated_data, expression = genotype == dataset_to_highlight)
+LB1Fd <- DimPlot(integrated_data, 
+                    cells.highlight = list(dataset_to_highlight = cells_of_interest), 
+                    cols.highlight = "#008B8B", 
+                    cols = "lightgrey") +
+  ggtitle(paste("Cluster", cluster_to_highlight)) + NoLegend()
+
