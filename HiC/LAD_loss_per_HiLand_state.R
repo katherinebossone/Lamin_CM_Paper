@@ -20,9 +20,9 @@ lamin_het <- import("Desktop/LB1het_LAC_zscore.bedgraph")
 lamin_null <- import("Desktop/LB1null_LAC_zscore.bedgraph")
 
 # Aggregate signal per HiLands region
-aggregate_signal <- function(atac_gr, hilands_gr) {
+aggregate_signal <- function(lamin_gr, hilands_gr) {
   
-  hits <- findOverlaps(hilands_gr, atac_gr)
+  hits <- findOverlaps(hilands_gr, lamin_gr)
   
   df <- data.frame(
     hiland_id = queryHits(hits),
@@ -31,7 +31,7 @@ aggregate_signal <- function(atac_gr, hilands_gr) {
   
   summary <- df %>%
     group_by(hiland_id) %>%
-    summarise(mean_signal = mean(atac_score, na.rm = TRUE)) %>%
+    summarise(mean_signal = mean(lamin_score, na.rm = TRUE)) %>%
     ungroup()
   
   # attach state info
