@@ -4,8 +4,8 @@ library(dplyr)
 library(ggplot2)
 
 # Import files
-cscore_het  <- import("Documents/LB1Fplus_cscore.bedgraph", format = "bedgraph")
-cscore_null <- import("Documents/LB1Fd_cscore.bedgraph", format = "bedgraph")
+cscore_het  <- import("LB1Fplus_cscore.bedgraph", format = "bedgraph")
+cscore_null <- import("LB1Fd_cscore.bedgraph", format = "bedgraph")
 
 # Find overlapping regions between the two conditions
 hits <- findOverlaps(cscore_het, cscore_null)
