@@ -20,10 +20,10 @@ scale_counts <- function(hic) {
   return(hic)
 }
 
-het1 <- load_hic_data("P0_5_HiC/indiv/P0_5_LB1Fplus_8450_2_5kb.tsv")
-het2 <- load_hic_data("P0_5_HiC/indiv/P0_5_LB1Fplus_8450_4_5kb.tsv")
-null1 <- load_hic_data("P0_5_HiC/indiv/P0_5_LB1Fd_8450_7_5kb.tsv")
-null2 <- load_hic_data("P0_5_HiC/indiv/P0_5_LB1Fd_8450_8_5kb.tsv")
+het1 <- load_hic_data("P0_5_LB1Fplus_8450_2_5kb.tsv")
+het2 <- load_hic_data("P0_5_LB1Fplus_8450_4_5kb.tsv")
+null1 <- load_hic_data("P0_5_LB1Fd_8450_7_5kb.tsv")
+null2 <- load_hic_data("P0_5_LB1Fd_8450_8_5kb.tsv")
 
 het1 <- scale_counts(het1)
 het2 <- scale_counts(het2)
