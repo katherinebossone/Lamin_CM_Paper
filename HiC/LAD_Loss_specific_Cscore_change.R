@@ -6,8 +6,8 @@ library(tidyverse)
 
 
 # Load files
-het_bed  <- "../LB1het_LAC_2state_S2.bed"   
-null_bed <- "../LB1null_LAC_2state_S2.bed"    
+het_bed  <- "LB1Fplus_LAC_2state_S2plus.bed"   
+null_bed <- "LB1Fminus_LAC_2state_S2plus.bed"    
 
 cscore_het_file  <- "LB1Fplus_cscore.bedgraph"  
 cscore_null_file <- "LB1Fd_cscore.bedgraph"     
