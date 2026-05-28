@@ -1,13 +1,9 @@
 library("depmixS4")
 
-# Function: To produce HMM tracks for ChIP or CUT&RUN data. 
-
-# Load file (Switch files for mutant)
-# For bigwigs use:
-# gr <- import("Desktop/bigwig_lamins/LB1null_LAC_merged.bw", format = "BigWig")
-# dataset <- as.data.frame(gr)
-
-dataset <- read.delim("~/Desktop/Nkx2_5Cre_Lmnb1Fminus_lamin-A_zscore.bw", header=FALSE, stringsAsFactors=FALSE)
+# Load files
+gr <- import("~/Desktop/Nkx2_5Cre_Lmnb1Fplus_lamin-A_zscore.bw", format = "BigWig")
+# gr <- import("~/Desktop/Nkx2_5Cre_Lmnb1Fminus_lamin-A_zscore.bw", format = "BigWig")
+dataset <- as.data.frame(gr)
 log2 <- dataset$score
 
 #Run HMM
