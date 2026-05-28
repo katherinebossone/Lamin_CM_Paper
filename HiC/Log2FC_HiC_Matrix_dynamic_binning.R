@@ -24,12 +24,12 @@ PLOT_END   <- 127131000
 # Jun chr4: 94000000 - 97500000
 
 # File locations
-wt_files  <- c("P0_5_HiC/indiv/P0_5_LB1Fplus_8450_2_5kb.tsv",
-               "P0_5_HiC/indiv/P0_5_LB1Fplus_8450_4_5kb.tsv")
-mut_files <- c("P0_5_HiC/indiv/P0_5_LB1Fd_8450_7_5kb.tsv",
-               "P0_5_HiC/indiv/P0_5_LB1Fd_8450_8_5kb.tsv")
+wt_files  <- c("P0_5_LB1Fplus_8450_2_5kb.tsv",
+               "P0_5_LB1Fplus_8450_4_5kb.tsv")
+mut_files <- c("P0_5_LB1Fd_8450_7_5kb.tsv",
+               "P0_5_LB1Fd_8450_8_5kb.tsv")
 
-wt_ins_file <- "fanc_insulation/LB1Fplus_fanc.insulation_1mb.bed"
+wt_ins_file <- "LB1Fplus_fanc.insulation_1mb.bed"
 
 out_dir <- "P0_5_HiC/dynamic_binned"
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
