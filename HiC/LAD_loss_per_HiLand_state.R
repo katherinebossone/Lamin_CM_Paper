@@ -7,7 +7,7 @@ library(ggplot2)
 
 # Read hiland file
 
-hilands <- read.table("Desktop/state_merged_sorted.bed", header = FALSE)
+hilands <- read.table("state_merged_sorted.bed", header = FALSE)
 colnames(hilands) <- c("chr", "start", "end", "state")
 
 hilands_gr <- GRanges(
@@ -16,8 +16,8 @@ hilands_gr <- GRanges(
   state    = hilands$state
 )
 
-lamin_het <- import("Desktop/LB1het_LAC_zscore.bedgraph")
-lamin_null <- import("Desktop/LB1null_LAC_zscore.bedgraph")
+lamin_het <- import("LB1het_LAC_zscore.bedgraph")
+lamin_null <- import("LB1null_LAC_zscore.bedgraph")
 
 # Aggregate signal per HiLands region
 aggregate_signal <- function(lamin_gr, hilands_gr) {
