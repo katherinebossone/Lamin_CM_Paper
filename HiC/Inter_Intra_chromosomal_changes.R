@@ -7,10 +7,10 @@ library(reshape2)
 
 # Define files
 file_paths <- list(
-  WT_rep1 = "P0_5_HiC/indiv/P0_5_LB1Fplus_8450_2_5kb.tsv",
-  WT_rep2 = "P0_5_HiC/indiv/P0_5_LB1Fplus_8450_4_5kb.tsv",
-  KO_rep1 = "P0_5_HiC/indiv/P0_5_LB1Fd_8450_7_5kb.tsv",
-  KO_rep2 = "P0_5_HiC/indiv/P0_5_LB1Fd_8450_8_5kb.tsv"
+  WT_rep1 = "P0_5_LB1Fplus_8450_2_5kb.tsv",
+  WT_rep2 = "P0_5_LB1Fplus_8450_4_5kb.tsv",
+  KO_rep1 = "P0_5_LB1Fd_8450_7_5kb.tsv",
+  KO_rep2 = "P0_5_LB1Fd_8450_8_5kb.tsv"
 )
 
 # Read in files and rename columns
