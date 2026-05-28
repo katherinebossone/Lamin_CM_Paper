@@ -8,8 +8,8 @@ library(ggplot2)
 library(grid)
 
 # Load and adjust start coordinates 
-het_bed  <- "Desktop/bigwig_lamins/LB1het_LAC_2state_S2.bed"
-null_bed <- "Desktop/bigwig_lamins/LB1null_LAC_2state_S2.bed"
+het_bed  <- "LB1Fplus_LAC_2state_S2plus.bed"
+null_bed <- "LB1Fminus_LAC_2state_S2plus.bed"
 
 het  <- import(het_bed,  format = "BED")
 null <- import(null_bed, format = "BED")
