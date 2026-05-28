@@ -68,8 +68,8 @@ extract_profiles <- function(gr, ins_dt, flank = flank_bins) {
 }
 
 ## Run ##
-wt_file  <- "Documents/LB1Fplus_fanc.insulation_1mb.bed"
-mut_file <- "Documents/LB1Fd_fanc.insulation_1mb.bed"
+wt_file  <- "LB1Fplus_fanc.insulation_1mb.bed"
+mut_file <- "LB1Fd_fanc.insulation_1mb.bed"
 
 wt_ins  <- load_insulation(wt_file)
 mut_ins <- load_insulation(mut_file)
