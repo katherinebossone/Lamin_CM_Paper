@@ -15,13 +15,13 @@ PLOT_START  <- 50.0000e6
 PLOT_END    <- 57.75000e6
 
 # Load files
-wt_files  <- c("P0_5_HiC/indiv/P0_5_LB1Fplus_8450_2_5kb.tsv",
-               "P0_5_HiC/indiv/P0_5_LB1Fplus_8450_4_5kb.tsv")
-mut_files <- c("P0_5_HiC/indiv/P0_5_LB1Fd_8450_7_5kb.tsv",
-               "P0_5_HiC/indiv/P0_5_LB1Fd_8450_8_5kb.tsv")
+wt_files  <- c("P0_5_LB1Fplus_8450_2_5kb.tsv",
+               "P0_5_LB1Fplus_8450_4_5kb.tsv")
+mut_files <- c("P0_5_LB1Fd_8450_7_5kb.tsv",
+               "P0_5_LB1Fd_8450_8_5kb.tsv")
 
-wt_ins_file  <- "fanc_insulation/LB1Fplus_fanc.insulation_1mb.bed"
-mut_ins_file <- "fanc_insulation/LB1Fd_fanc.insulation_1mb.bed"
+wt_ins_file  <- "LB1Fplus_fanc.insulation_1mb.bed"
+mut_ins_file <- "LB1Fd_fanc.insulation_1mb.bed"
 
 out_dir <- "P0_5_HiC/dynamic_binned"
 dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
