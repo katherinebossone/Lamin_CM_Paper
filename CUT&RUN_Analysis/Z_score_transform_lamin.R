@@ -19,5 +19,5 @@ export(data, "Nkx2_5Cre_Lmnb1Fplus_lamin-A_zscore.bw", format = "bigWig")
 #export(data, "Nkx2_5Cre_Lmnb1Fminus_lamin-A_zscore.bw", format = "bigWig")
 
 # Export as bedgraph
-export(data, "Nkx2_5Cre_Lmnb1Fplus_lamin-A_zscore.bedgraph",format = "bedGraph")
-#export(data, "Nkx2_5Cre_Lmnb1Fminus_lamin-A_zscore.bedgraph",format = "bedGraph")
+export(data, "LB1het_LAC_zscore.bedgraph",format = "bedGraph")
+#export(data, "LB1null_LAC_zscore.bedgraph",format = "bedGraph")
