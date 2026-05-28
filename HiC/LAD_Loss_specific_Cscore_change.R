@@ -9,8 +9,8 @@ library(tidyverse)
 het_bed  <- "../LB1het_LAC_2state_S2.bed"   
 null_bed <- "../LB1null_LAC_2state_S2.bed"    
 
-cscore_het_file  <- "LB1Fplus_modified_cscore.bedgraph"  
-cscore_null_file <- "LB1Fd_modified_cscore.bedgraph"     
+cscore_het_file  <- "LB1Fplus_cscore.bedgraph"  
+cscore_null_file <- "LB1Fd_cscore.bedgraph"     
 
 het  <- import(het_bed, format = "BED")
 null <- import(null_bed, format = "BED")
