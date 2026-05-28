@@ -1,8 +1,8 @@
 library(edgeR)
 
 # Import data
-counts <- read.delim("Desktop/RNA/P7.5_RNA/counts_only.txt", header=T, row.names=1)
-metadata <- read.delim("Desktop/RNA/P7.5_RNA/Names.txt", header=T)
+counts <- read.delim("counts_only.txt", header=T, row.names=1)
+metadata <- read.delim("Names.txt", header=T)
 
 # Define group and create DGE object
 if (ncol(metadata) > 2) {
