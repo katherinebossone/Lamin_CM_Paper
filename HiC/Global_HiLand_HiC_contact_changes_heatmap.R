@@ -31,7 +31,7 @@ null1 <- scale_counts(null1)
 null2 <- scale_counts(null2)
 
 # Load HiLands states
-hilands <- fread("state_location.txt", header = FALSE)
+hilands <- fread("state_merged_sorted.bed", header = FALSE)
 colnames(hilands) <- c("chr","start","end","state")
 hilands <- hilands[chr %in% keep_chrs]
 hilands$start <- as.numeric(hilands$start)
